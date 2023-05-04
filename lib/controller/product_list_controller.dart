@@ -22,7 +22,7 @@ class ProductListController extends GetxController {
     try {
       final dio = Dio();
       final response = await dio
-          .get('https://api-marketplace.supershop.ai/api/v1/main-product/list?category=2&operation_type=1&per_page=7&page=$page');
+          .get('Your Api');
 
       var data = response.data['data']['data'];
 
@@ -45,7 +45,7 @@ class ProductListController extends GetxController {
     try {
       final dio = Dio();
       final response = await dio
-          .get('https://api-marketplace.supershop.ai/api/v1/main-product/list?category=2&operation_type=1&per_page=7&page=$page');
+          .get('Your Api');
 
       var data = response.data['data']['data'];
 
