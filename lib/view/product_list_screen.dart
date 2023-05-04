@@ -1,4 +1,5 @@
 import 'package:dio_calling_mvc/controller/product_list_controller.dart';
+import 'package:dio_calling_mvc/widgets/animated_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,11 +22,7 @@ class ProductListScreen extends GetView<ProductListController> {
       ),
       body: Obx(
         () => controller.isLoading.value
-            ? Center(
-                child: CircularProgressIndicator(
-                  color: Colors.grey[700],
-                ),
-              )
+            ? const AnimatedLoader()
             : Column(
                 children: [
                   Expanded(
@@ -53,10 +50,7 @@ class ProductListScreen extends GetView<ProductListController> {
                   ),
                   Obx(
                     () => controller.isLoadingMore.value
-                        ? const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: LinearProgressIndicator(),
-                          )
+                        ? const SizedBox(height: 50, width: 50, child: AnimatedLoader())
                         : const SizedBox(),
                   ),
                 ],

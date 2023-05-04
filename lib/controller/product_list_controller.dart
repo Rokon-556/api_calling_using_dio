@@ -27,6 +27,7 @@ class ProductListController extends GetxController {
       var data = response.data['data']['data'];
 
       totalProduct.value = response.data['data']['total'];
+      log('********$totalProduct');
 
       for (var product in data) {
         productList.add(Product.fromJson(product));
@@ -45,13 +46,14 @@ class ProductListController extends GetxController {
     try {
       final dio = Dio();
       final response = await dio
-          .get('Api');
+          .get('Your Api');
 
       var data = response.data['data']['data'];
 
       if (data.isNotEmpty) {
         for (var product in data) {
           productList.add(Product.fromJson(product));
+          log('length:${productList.length}');
         }
 
         isLoadingMore.value = false;
