@@ -22,7 +22,7 @@ class ProductListController extends GetxController {
     try {
       final dio = Dio();
       final response = await dio
-          .get('Your Api');
+          .get('Api');
 
       var data = response.data['data']['data'];
 
@@ -45,7 +45,7 @@ class ProductListController extends GetxController {
     try {
       final dio = Dio();
       final response = await dio
-          .get('Your Api');
+          .get('Api');
 
       var data = response.data['data']['data'];
 
