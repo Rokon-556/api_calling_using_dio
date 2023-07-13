@@ -3,9 +3,11 @@ import 'package:dio_calling_mvc/routes/pages.dart';
 import 'package:dio_calling_mvc/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   // await Future.delayed(const Duration(milliseconds: 300));
   runApp(const MyApp());
 }

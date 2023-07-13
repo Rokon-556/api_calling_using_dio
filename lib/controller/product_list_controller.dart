@@ -20,31 +20,37 @@ class ProductListController extends GetxController {
   }
 
   Future<void> getProduct() async {
-    final dio = Dio();
-    final response = await dio.get("https://api-marketplace.supershop.ai/api/v1/main-product/list?category=2&operation_type=1&per_page=7&page=$page");
-    if(response.statusCode ==200){
-      var data = response.data['data']['data'];
-      totalProduct.value = response.data['data']['total'];
-      for(var product in data){
-        productList.add(Product.fromJson(product));
-      }
-      AppCacheManager.renewCacheData("product", data);
-      isLoading.value = false;
-    }else{
-      log("hello");
-      var cachedSellCategoryString = AppCacheManager.getCachedData("product");
-      log("cached string: $cachedSellCategoryString");
-      if (cachedSellCategoryString != null && cachedSellCategoryString != "") {
-        ProductListModel cachedSellData = ProductListModel.fromJson(cachedSellCategoryString);
+   try{
+     final dio = Dio();
+     final response = await dio.get("https://api-marketplace.supershop.ai/api/v1/main-product/list?category=2&operation_type=1&per_page=20&page=$page");
 
-        if (cachedSellData.data != null) {
-          productList.value = cachedSellData.data?.data ?? [];
-          // log(message)
-          // productList.value = cachedSellData.data ?? [];
-        }
-      }
-      // isLoading.value = false;
-    }
+     if(response.statusCode == 200){
+       var data = response.data['data']['data'];
+       totalProduct.value = response.data['data']['total'];
+       for(var product in data){
+         productList.add(Product.fromJson(product));
+       }
+       AppCacheManager.renewCacheData("product",response.data);
+
+       log('total : $totalProduct');
+       isLoading.value = false;
+     }else{
+       log("hello");
+       var cachedSellCategoryString = AppCacheManager.getCachedData("product");
+       log("cached string: $cachedSellCategoryString");
+       if (cachedSellCategoryString != null && cachedSellCategoryString != "") {
+         ProductListModel cachedSellData = ProductListModel.fromJson(cachedSellCategoryString);
+
+         if (cachedSellData.data != null) {
+           productList.value = cachedSellData.data?.data ?? [];
+         }
+       }
+       isLoading.value = false;
+     }
+   }catch(e){
+     log(e.toString());
+     isLoading.value = false;
+   }
     // try {
     //   final dio = Dio();
     //   final response = await dio
@@ -73,14 +79,13 @@ class ProductListController extends GetxController {
     try {
       final dio = Dio();
       final response = await dio
-          .get('Your Api');
+          .get("https://api-marketplace.supershop.ai/api/v1/main-product/list?category=2&operation_type=1&per_page=7&page=$page");
 
       var data = response.data['data']['data'];
 
       if (data.isNotEmpty) {
         for (var product in data) {
           productList.add(Product.fromJson(product));
-          log('length:${productList.length}');
         }
 
         isLoadingMore.value = false;

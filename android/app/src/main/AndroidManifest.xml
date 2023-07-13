@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dio_calling_mvc">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="dio_calling_mvc"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
